@@ -82,4 +82,24 @@ The P45 implementation could not be reviewed because its pull request was not av
 
 The P47 implementation could not be reviewed because its pull request was not available in the repository when the review was conducted. No review comments were submitted.
 
-## E3 Where my block
+## E3 Where my block sits
+
+My block sits in the memory-mapped I/O (MMIO) peripheral layer of the computer system. It is fed by the processor data bus and address decoder signals (`clk`, `rst`, `sel`, `we`, `re`, `ridx`, `wdata`), and it outputs register data (`rdata`) back to the datapath along with an interrupt request line (`irq`) to the interrupt control logic.
+
+## E4 Syllabus map
+
+The following topics are directly touched by the P46 timer work:
+
+- [ ] Logic gates, Boolean algebra, K-maps
+- [x] Combinational circuits (adders, decoders, encoders, multiplexers) — used for address decoding and data multiplexing
+- [x] Flip-flops, registers, counters — used for `count`, `cmp`, and state flags
+- [ ] Memory (RAM, ROM)
+- [x] Number systems, complements, signed arithmetic — byte/word data handling and offsets
+- [x] Bus organisation, instruction codes and formats — MMIO slot architecture and load/store instructions
+- [x] Instruction cycle, hardwired vs microprogrammed control — execution of load/store and bus handshaking
+- [x] Interrupts and the interrupt cycle — `irq` output generation
+- [ ] Pipelining
+- [x] Register organisation, stack, addressing modes — base-plus-offset addressing and stack preservation in assembly
+- [x] RISC vs CISC, multicore, GPU
+- [ ] Memory hierarchy, cache
+- [x] I/O interface, programmed / interrupt-driven I/O, DMA — memory-mapped I/O polling implementation
