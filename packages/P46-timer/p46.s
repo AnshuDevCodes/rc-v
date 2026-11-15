@@ -11,22 +11,25 @@ p46_main:
         sw      s0, 8(sp)
 
         # Load the MMIO base address for Slot 3 
-        # (Note: Adjust the base address 0xFFFF00C0 if your course framework uses a different slot offset)
-        li      s0, 0xFFFF00C0       
+        li      s0, 0xFFFF00C0       # verify Slot 3 base
 
-        # 1. Set the comparison target value (CMP) in the timer
-        li      t0, 5                # Target count value to match
-        sb      t0, 4(s0)            # Store to CMP register (offset +4)
-
-        # 2. Enable the timer via the CTRL register (bit 0 = enable)
-        li      t0, 1                
-        sb      t0, 8(s0)            # Store to CTRL register (offset +8)
+        # Initialize and configure timer registers using word stores
+        sw      zero, 8(s0)          # CTRL = 0 (disable)
+        sw      zero, 0(s0)          # COUNT = 0
+        li      t0, 1
+        sw      t0, 12(s0)           # clear STATUS
+        li      t0, 5
+        sw      t0, 4(s0)            # CMP = 5
+        li      t0, 1
+        sw      t0, 8(s0)            # CTRL = enable
 
 p46_poll_loop:
-        # 3. Read the STATUS register (bit 0 = sticky match flag)
-        lb      t1, 12(s0)           # Load from STATUS register (offset +12)
-        andi    t1, t1, 1            # Isolate bit 0 (the match flag)
-        beqz    t1, p46_poll_loop    # If match flag is 0, keep looping/waiting
+        # Read the STATUS register and isolate the match flag
+        lw      t1, 12(s0)
+        andi    t1, t1, 1
+        beqz    t1, p46_poll_loop
+
+        sw      zero, 8(s0)          # Stop the timer
 
         # Clean up stack and return when match is detected
         lw      s0, 8(sp)
