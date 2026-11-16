@@ -112,16 +112,35 @@ Trace one **ADD** instruction through the whole RC-V processor,
 block by block (use docs/ARCHITECTURE.md and the simulator's --trace output).
 List the blocks it passes through and the value on the main signals.
 
+### E1 Instruction trace: ADD
+
+An ADD instruction passes through the following blocks in the RC-V processor:
+
+1. **Fetch:** P14 (PC) provides the instruction address and P30 (ROM) fetches the instruction.
+2. **Decode:** P17 extracts the instruction fields. P21 identifies it as an OP instruction. P22/P23 generate the control word, and P24 selects the control. P13 reads the source registers.
+3. **Execute:** P26 selects the operands, P10 controls the ALU, and P01–P08 perform the addition.
+4. **Memory:** ADD does not require a data memory read or write.
+5. **Write-back:** P25 selects the ALU result, and the register file (P11/P12/P13) writes it into the destination register.
+6. **Next PC:** P03 calculates PC + 4, P16 selects the next address, and P15 updates the PC.
+
+For an ADD instruction, the control word is **0x4000**. The `regwrite` signal is 1, `memread` and `memwrite` are 0, and `wbsel` is 00 because the ALU result is written back.
 
 
 ## E2 Neighbour review
 Review the pull requests of P65 (Complement unit (r and r-1 complements)) and P49 (Performance counters). Paste the links to your review
 comments here.
 
+
+
 ## E3 Where my block sits
 In two or three sentences: which layer of the computer is your block in
 (gates / components / datapath / control / instruction set / memory / I/O),
 which blocks feed it and which blocks use its output?
+
+
+### E3 Where my block sits
+
+My block, P66 Reset Controller, belongs to the control layer of the computer. It receives the clock signal (`clk`) and reset button input (`btn`), and produces the reset signal (`rst`). This signal is used by blocks such as the PC register (P14), register file storage (P12), CSR file (P37), cache tags (P35), and I/O devices to initialise their state.
 
 ## E4 Syllabus map
 Tick every syllabus topic your work touched (main units: Unit 1, Unit 4).
