@@ -8,6 +8,25 @@ module p66_reset_ctrl (
     output wire rst
 );
 
-    assign rst = 1'd0;   // placeholder
+    assign rst = 1'd0;   // 
+
+module p66_reset_ctrl (
+    input  wire clk,
+    input  wire btn,
+    output wire rst
+);
+
+    reg [2:0] count;
+
+    always @(posedge clk) begin
+        if (btn)
+            count <= 3'd4;
+        else if (count != 3'd0)
+            count <= count - 3'd1;
+    end
+
+    assign rst = (count != 3'd0);
 
 endmodule
+
+
