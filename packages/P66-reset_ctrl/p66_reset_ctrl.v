@@ -21,7 +21,7 @@ module p66_reset_ctrl (
             count <= count - 3'd1;
     end
 
-    assign rst = (count != 3'd0);
+    assign rst = (count != 3'd0); 
 
 endmodule
 
