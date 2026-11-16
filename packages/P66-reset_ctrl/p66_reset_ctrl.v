@@ -10,6 +10,9 @@ module p66_reset_ctrl (
 );
 
     reg [2:0] count;
+    initial begin
+    count = 3'd4;
+    end
 
     always @(posedge clk) begin
         if (btn)
