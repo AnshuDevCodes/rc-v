@@ -145,16 +145,16 @@ My block, P66 Reset Controller, belongs to the control layer of the computer. It
 ## E4 Syllabus map
 Tick every syllabus topic your work touched (main units: Unit 1, Unit 4).
 
-- [ ] Logic gates, Boolean algebra, K-maps
-- [ ] Combinational circuits (adders, decoders, encoders, multiplexers)
-- [ ] Flip-flops, registers, counters
+- [ ✓] Logic gates, Boolean algebra, K-maps
+- [ ✓] Combinational circuits (adders, decoders, encoders, multiplexers)
+- [ ✓] Flip-flops, registers, counters
 - [ ] Memory (RAM, ROM)
-- [ ] Number systems, complements, signed arithmetic
-- [ ] Bus organisation, instruction codes and formats
+- [ ✓] Number systems, complements, signed arithmetic
+- [ ✓] Bus organisation, instruction codes and formats
 - [ ] Instruction cycle, hardwired vs microprogrammed control
 - [ ] Interrupts and the interrupt cycle
 - [ ] Pipelining
-- [ ] Register organisation, stack, addressing modes
-- [ ] RISC vs CISC, multicore, GPU
+- [✓ ] Register organisation, stack, addressing modes
+- [ ✓] RISC vs CISC, multicore, GPU
 - [ ] Memory hierarchy, cache
-- [ ] I/O interface, programmed / interrupt-driven I/O, DMA
+- [ ✓] I/O interface, programmed / interrupt-driven I/O, DMA
