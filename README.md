@@ -58,6 +58,15 @@ GitHub account is enough; your teacher knows which code belongs to whom.
 GitHub checks everything when you open a pull request, so you only need Digital
 on your laptop. If you also have Python 3:
 
+To see the class computer run in your browser (pick a package, type its input, watch the
+terminal, text screen, LEDs and hex display):
+
+```bash
+python tools/console.py
+```
+
+then open http://localhost:8066. Other tools:
+
 ```bash
 cd tools
 python -m rcv.progrun 17 ../packages/P17-ifields/p17.s --input-file ../packages/P17-ifields/tests/program/test1.in
