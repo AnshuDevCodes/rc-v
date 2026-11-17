@@ -31,7 +31,8 @@ flowchart LR
 | How the computer works | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | The instructions and the assembler | [docs/ISA.md](docs/ISA.md) |
 | All 66 packages | [docs/PACKAGES.md](docs/PACKAGES.md) |
-| Live progress of the whole class | the class board (GitHub Pages of this repository) |
+| Live progress of the whole class | [the class board](https://campus-sutra.github.io/rc-v/) |
+| **Run the class computer in your browser** | [the RC-V console](https://campus-sutra.github.io/rc-v/console/) |
 
 ## How to join
 
