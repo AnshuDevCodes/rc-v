@@ -12,6 +12,17 @@
 //   irq = match AND CTRL.bit1
 // Reads are combinational (rdata must not wait for the clock);
 // all state changes happen on the rising edge of clk.
+// P46 Timer  (I/O device slot 3, registers at 0x000200C0)
+//   reg 0  COUNT   (read/write)  counts up every cycle while CTRL.bit0 = 1
+//   reg 1  CMP     (read/write)
+//   reg 2  CTRL    bit0 = enable, bit1 = interrupt enable
+//   reg 3  STATUS  bit0 = match (set when COUNT == CMP while enabled,
+//                                cleared by writing STATUS)
+//   reg 15 ID      always reads 46 (the package number)
+//   irq = match AND CTRL.bit1
+// Reads are combinational (rdata must not wait for the clock) and always
+// show register ridx; writes need sel & we;
+// all state changes happen on the rising edge of clk.
 module p46_timer (
     input  wire clk,
     input  wire rst,
@@ -73,19 +84,17 @@ module p46_timer (
     end
 
     // ---------------- read port (combinational) ----------------
+    // rdata always shows the register addressed by ridx; it does not wait
+    // for the clock and does not depend on sel / re.
     always @* begin
-        rdata = 32'd0;
-        if (sel & re) begin
-            case (ridx)
-                R_COUNT:  rdata = count;
-                R_CMP:    rdata = cmp;
-                R_CTRL:   rdata = {30'd0, ie, en};
-                R_STATUS: rdata = {31'd0, match};
-                R_ID:     rdata = 32'd46;
-                default:  rdata = 32'd0;
-            endcase
-        end
+        case (ridx)
+            R_COUNT:  rdata = count;
+            R_CMP:    rdata = cmp;
+            R_CTRL:   rdata = {30'd0, ie, en};
+            R_STATUS: rdata = {31'd0, match};
+            R_ID:     rdata = 32'd46;
+            default:  rdata = 32'd0;
+        endcase
     end
 
 endmodule
-
